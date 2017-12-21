@@ -136,31 +136,31 @@ int setCounterReadings( int id, int un, struct tm newTime, int newReadings ){
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
-void ShowUserData( int id ) {
+void ShowUserData( int id, char *buffer ) {
     int i = 1;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->userID == id )
-            vecOfCounters.at(i).showData();
+            vecOfCounters.at(i).showData( buffer );
         i++;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
-void ShowCompanyData( int id ) {
+void ShowCompanyData( int id, char *buffer ) {
     int i = 1;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->companyID == id )
-            vecOfCounters.at(i).showData();
+            vecOfCounters.at(i).showData( buffer );
         i++;
     }
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
-void ShowBadUsers( int id, int day, int month, int year ) {
+void ShowBadUsers( int id, int day, int month, int year, char *buffer ) {
     int i = 1;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
@@ -173,7 +173,7 @@ void ShowBadUsers( int id, int day, int month, int year ) {
                 i2++;
             }
             if( tmp2 != vecOfCounters.at( i ).data.cend() ) {
-                vecOfCounters.at(i).showData();
+                vecOfCounters.at(i).showData( buffer );
             }
         }
         i++;
