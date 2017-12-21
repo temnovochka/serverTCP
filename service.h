@@ -23,25 +23,25 @@ public:
         readings  = newReadings;
     }
 
-//    char showData( char *buffer ) {
-//
-//        cout << " date = " << readingDate.tm_mday << "." << readingDate.tm_mon << "." << readingDate.tm_year
-//             << ", readings = " << readings;
-//
-//        char tmp[DEFAULT_BUFLEN];
-//        strcat( buffer, " date = " );
-//        sprintf( tmp, "%d", readingDate.tm_mday );
-//        strcat( buffer, tmp );
-//        strcat( buffer, "." );
-//        sprintf( tmp, "%d", readingDate.tm_mon );
-//        strcat( buffer, tmp );
-//        strcat( buffer, "." );
-//        sprintf( tmp, "%d", readingDate.tm_year );
-//        strcat( buffer, tmp );
-//        strcat( buffer, ", readings = " );
-//        sprintf( tmp, "%d", readings );
-//        strcat( buffer, tmp );
-//    }
+    char showData( char *buffer ) {
+
+        cout << " date = " << readingDate.tm_mday << "." << readingDate.tm_mon << "." << readingDate.tm_year
+             << ", readings = " << readings;
+
+        char tmp[DEFAULT_BUFLEN];
+        strcat( buffer, " date = " );
+        sprintf( tmp, "%d", readingDate.tm_mday );
+        strcat( buffer, tmp );
+        strcat( buffer, "." );
+        sprintf( tmp, "%d", readingDate.tm_mon );
+        strcat( buffer, tmp );
+        strcat( buffer, "." );
+        sprintf( tmp, "%d", readingDate.tm_year );
+        strcat( buffer, tmp );
+        strcat( buffer, ", readings = " );
+        sprintf( tmp, "%d", readings );
+        strcat( buffer, tmp );
+    }
 
     int CompareDate( int day, int month, int year ) {
         if( readingDate.tm_year == year && readingDate.tm_mon == month && readingDate.tm_mday == day )
@@ -62,16 +62,19 @@ public:
         userID = id;
     }
 
-    void showData() {
+    void showData( char *buffer ) {
+        char result[DEFAULT_BUFLEN];
         if( data.size() != 0 ) {
-            cout << "Number of readings: " << data.size() << endl;
-            vector<CounterData>::const_pointer tmp;
-            tmp = data.data();
-            for (size_t n = data.size(); 0 < n; --n, tmp++)
-                cout << " " << tmp;
-            cout << endl;
-        } else
-                cout << "No data" << endl;
+            for( auto n : data ){
+                n.showData( buffer );
+                strcat( result, buffer );
+                strcat( result, "\n" );
+            }
+        }
+        else {
+            cout << "No data" << endl;
+            buffer = "No_data";
+        }
     }
 };
 
@@ -80,9 +83,9 @@ int readn( long socket, char *recvbuf, int recvbuf_len );
 int addCounter( int id, int un );
 int setCounterToUser( int id );
 int setCounterReadings( int id, int un, struct tm newTime, int newReadings );
-void ShowUserData( int id );
-void ShowCompanyData( int id );
-void ShowBadUsers( int id, int day, int month, int year );
+void ShowUserData( int id, char *buffer );
+void ShowCompanyData( int id, char *buffer );
+void ShowBadUsers( int id, int day, int month, int year, char *buffer );
 int GetID( long tmpSocket );
 
 #endif // SERVICE_H_INCLUDED

@@ -78,7 +78,7 @@ int GetID( long tmpSocket ) {
 
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
-int addCounter( int id, int un ){
+int addCounter( int id, int un ) {
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->companyID == id && tmp->uniqNumber == un ){
