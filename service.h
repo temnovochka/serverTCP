@@ -3,11 +3,12 @@
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#define N 512
 #include <vector>
 #include <iostream>
 #include <array>
 #include <ctime>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -22,10 +23,26 @@ public:
         readings  = newReadings;
     }
 
-    void showData() {
-        cout << " date = " << readingDate.tm_mday << "." << readingDate.tm_mon << "." << readingDate.tm_year
-             << ", readings = " << readings;
-    }
+//    char showData( char *buffer ) {
+//
+//        cout << " date = " << readingDate.tm_mday << "." << readingDate.tm_mon << "." << readingDate.tm_year
+//             << ", readings = " << readings;
+//
+//        char tmp[DEFAULT_BUFLEN];
+//        strcat( buffer, " date = " );
+//        sprintf( tmp, "%d", readingDate.tm_mday );
+//        strcat( buffer, tmp );
+//        strcat( buffer, "." );
+//        sprintf( tmp, "%d", readingDate.tm_mon );
+//        strcat( buffer, tmp );
+//        strcat( buffer, "." );
+//        sprintf( tmp, "%d", readingDate.tm_year );
+//        strcat( buffer, tmp );
+//        strcat( buffer, ", readings = " );
+//        sprintf( tmp, "%d", readings );
+//        strcat( buffer, tmp );
+//    }
+
     int CompareDate( int day, int month, int year ) {
         if( readingDate.tm_year == year && readingDate.tm_mon == month && readingDate.tm_mday == day )
             return 1;
