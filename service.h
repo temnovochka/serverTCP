@@ -26,10 +26,10 @@ public:
     char showData( char *buffer ) {
 
         cout << " date = " << readingDate.tm_mday << "." << readingDate.tm_mon << "." << readingDate.tm_year
-             << ", readings = " << readings;
+             << ",readings = " << readings;
 
         char tmp[DEFAULT_BUFLEN];
-        strcat( buffer, " date = " );
+        strcat( buffer, " date_=_" );
         sprintf( tmp, "%d", readingDate.tm_mday );
         strcat( buffer, tmp );
         strcat( buffer, "." );
@@ -38,9 +38,10 @@ public:
         strcat( buffer, "." );
         sprintf( tmp, "%d", readingDate.tm_year );
         strcat( buffer, tmp );
-        strcat( buffer, ", readings = " );
+        strcat( buffer, ",@readings_=_" );
         sprintf( tmp, "%d", readings );
         strcat( buffer, tmp );
+        strcat( buffer, "@" );
     }
 
     int CompareDate( int day, int month, int year ) {
@@ -66,9 +67,9 @@ public:
         char result[DEFAULT_BUFLEN];
         if( data.size() != 0 ) {
             for( auto n : data ){
-                n.showData( buffer );
-                strcat( result, buffer );
-                strcat( result, "\n" );
+                n.showData( result );
+                strcat( buffer, result );
+                strcat( buffer, "@" );
             }
         }
         else {

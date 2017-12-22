@@ -58,7 +58,7 @@ void UserProcess( long tmpSocket ){
     cout << "User id = " << id << endl;
     char an[DEFAULT_BUFLEN];
     memset( an, 0, DEFAULT_BUFLEN );
-    memmove( an, "choice:", 7 );
+    memmove( an, "Your_choice:", 12 );
     int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
     //int iResult = sendLine( tmpSocket, an );         // sending message to client
     if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
@@ -80,7 +80,7 @@ void UserProcess( long tmpSocket ){
             if( setCounterToUser( id ) == 1 ){
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "Set_counter_to_user", 19 );
+                memmove( an, "Set_counter_to_user@Your_choice:", 32 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -91,7 +91,7 @@ void UserProcess( long tmpSocket ){
             else{
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "No_free_counters", 16 );
+                memmove( an, "No_free_counters@Your_choice:", 29 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -105,7 +105,7 @@ void UserProcess( long tmpSocket ){
             ShowUserData( id, buf );
             char an[DEFAULT_BUFLEN];
             memset( an, 0, DEFAULT_BUFLEN );
-            memmove( an, "Shown", 5 );
+            memmove( an, "Shown@Your_choice:", 18 );
             int iResult = send( tmpSocket, buf, DEFAULT_BUFLEN, 0 );         // sending message to client
             if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                 cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -128,7 +128,7 @@ void UserProcess( long tmpSocket ){
             if( setCounterReadings( id, un, *mytime, data ) ){
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "Set_counter_readings", 20 );
+                memmove( an, "Set_counter_readings@Your_choice:", 33 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -139,7 +139,7 @@ void UserProcess( long tmpSocket ){
             else{
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "Have_no_such_counter", 20 );
+                memmove( an, "Have_no_such_counter@Your_choice:", 33 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -183,7 +183,7 @@ void CompanyProcess( long tmpSocket ){
     cout << "Company id = " << id << endl;
     char an[DEFAULT_BUFLEN];
     memset( an, 0, DEFAULT_BUFLEN );
-    memmove( an, "choice:", 7 );
+    memmove( an, "Your_choice:", 12 );
     int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
     //int iResult = sendLine( tmpSocket, an );         // sending message to client
     if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
@@ -209,7 +209,7 @@ void CompanyProcess( long tmpSocket ){
             if( addCounter( id, un ) == 1 ) {
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "Added", 5 );
+                memmove( an, "Added@Your_choice:", 18 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -220,7 +220,7 @@ void CompanyProcess( long tmpSocket ){
             else{
                 char an[DEFAULT_BUFLEN];
                 memset( an, 0, DEFAULT_BUFLEN );
-                memmove( an, "Already_have_such_counter", 25 );
+                memmove( an, "Already_have_such_counter@Your_choice:", 38 );
                 int iResult = send( tmpSocket, an, DEFAULT_BUFLEN, 0 );         // sending message to client
                 if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                     cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -234,7 +234,7 @@ void CompanyProcess( long tmpSocket ){
             ShowCompanyData( id, buf );
             char an[DEFAULT_BUFLEN];
             memset( an, 0, DEFAULT_BUFLEN );
-            memmove( an, "Shown", 5 );
+            memmove( an, "Shown@Your_choice:", 18 );
             int iResult = send( tmpSocket, buf, DEFAULT_BUFLEN, 0 );         // sending message to client
             if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                 cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;
@@ -260,7 +260,7 @@ void CompanyProcess( long tmpSocket ){
             ShowBadUsers( id, day, month, year, buf );
             char an[DEFAULT_BUFLEN];
             memset( an, 0, DEFAULT_BUFLEN );
-            memmove( an, "Shown", 5 );
+            memmove( an, "Shown@Your_choice:", 18 );
             int iResult = send( tmpSocket, buf, DEFAULT_BUFLEN, 0 );         // sending message to client
             if( iResult <= 0 ) {                                        // if error of sending - client disconnect - exit from while
                 cout << "Error sending answer. Client " << tmpSocket << " disconnect" << endl;

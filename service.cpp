@@ -97,14 +97,16 @@ int addCounter( int id, int un ) {
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
 int setCounterToUser( int id ) {
-    int i = 1;
+    int i = 0;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->userID == 0 )
             break;
         i++;
     }
+    cout << "count to i = " << i << endl;
     if( tmp != vecOfCounters.cend() ) {
+        //tmp->setUser( id );
         vecOfCounters.at( i ).setUser( id );
     } else {
         cout << "No free counters" << endl;
@@ -116,17 +118,19 @@ int setCounterToUser( int id ) {
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
 int setCounterReadings( int id, int un, struct tm newTime, int newReadings ){
-    int i = 1;
+    int i = 0;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->userID == id && tmp->uniqNumber == un )
             break;
         i++;
     }
+    cout << "count to i = " << i << endl;
     if( tmp != vecOfCounters.cend() ) {
         CounterData newCounterData;
         newCounterData.setData( newTime, newReadings );
         vecOfCounters.at( i ).data.push_back( newCounterData );
+        //tmp.data,push_back( newCounterData );
     } else {
         cout << "No such counter" << endl;
         return 0;
@@ -137,11 +141,12 @@ int setCounterReadings( int id, int un, struct tm newTime, int newReadings ){
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
 void ShowUserData( int id, char *buffer ) {
-    int i = 1;
+    int i = 0;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->userID == id )
             vecOfCounters.at(i).showData( buffer );
+            //tmp.showData( buffer );
         i++;
     }
 }
@@ -149,11 +154,12 @@ void ShowUserData( int id, char *buffer ) {
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
 void ShowCompanyData( int id, char *buffer ) {
-    int i = 1;
+    int i = 0;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->companyID == id )
             vecOfCounters.at(i).showData( buffer );
+            //tmp.showData( buffer );
         i++;
     }
 }
@@ -161,19 +167,24 @@ void ShowCompanyData( int id, char *buffer ) {
 //----------------------------------------------------------------------------------------------------------------------------------------
 //
 void ShowBadUsers( int id, int day, int month, int year, char *buffer ) {
-    int i = 1;
+    int i = 0;
     auto tmp = vecOfCounters.cbegin();
     for( ; tmp !=  vecOfCounters.cend(); tmp++ ) {
         if( tmp->companyID == id ){
             int i2 = 1;
-            auto tmp2 = vecOfCounters.at( i ).data.cbegin();
-            for( ; tmp2 !=  vecOfCounters.at( i ).data.cend(); tmp++ ) {
+            //auto tmp2 = vecOfCounters.at( i ).data.cbegin();
+            auto tmp2 = tmp->data.cbegin();
+            //for( ; tmp2 !=  vecOfCounters.at( i ).data.cend(); tmp++ ) {
+            for( ; tmp2 !=  tmp->data.cend(); tmp2++ ) {
                 if( vecOfCounters.at( i ).data.at( i2 ).CompareDate( day, month, year ) == 1 )
+                //if( tmp2.CompareDate( day, month, year ) == 1 )
                     break;
                 i2++;
             }
-            if( tmp2 != vecOfCounters.at( i ).data.cend() ) {
+            //if( tmp2 != vecOfCounters.at( i ).data.cend() ) {
+            if( tmp2 != tmp->data.cend() ) {
                 vecOfCounters.at(i).showData( buffer );
+                //tmp.showData( buffer );
             }
         }
         i++;
